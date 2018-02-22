@@ -1,0 +1,22 @@
+{
+  "name": "react-node-sass-bootstrap-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0",
+    "concurrently": "^3.5.1",
+    "express": "^4.16.2",
+    "nodemon": "^1.15.1"
+  }
+}
