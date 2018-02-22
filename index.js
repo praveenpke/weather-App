@@ -2,12 +2,29 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
+const cors = require('cors');
+
+
+
+app.use(cors());
+
+//parse the json in incoming request
+app.use(bodyParser.json());
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
+app.use(express.static(path.join(__dirname,'client/public')));
+
 
 app.get('/',function(req,res){
     res.send("Hello World! Coming from the server")
 });
-
-
 
 app.get('/api/weather',function(req,res){
     console.log(req.query);
@@ -55,5 +72,7 @@ app.use(bodyParser.urlencoded({ extended: true })); //support encoded urls
 
 
 
-
-app.listen(5000);
+const PORT = 3000;
+app.listen(PORT,()=>{
+    console.log('server running');
+});
