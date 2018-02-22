@@ -18976,6 +18976,10 @@ var _axios = __webpack_require__(36);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _sidepanel = __webpack_require__(56);
+
+var _sidepanel2 = _interopRequireDefault(_sidepanel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18993,7 +18997,13 @@ var App = function (_Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            temperature: ''
+            temperature: '',
+            precipitationIntensity: '',
+            precipitationChance: '',
+            humidity: '',
+            icon: '',
+            windspeed: '',
+            date: ''
         };
         _this.getWeather = _this.getWeather.bind(_this);
         _this.renderTemperature = _this.renderTemperature.bind(_this);
@@ -19016,7 +19026,13 @@ var App = function (_Component) {
             }).then(function (response) {
                 console.log(response);
                 _this2.setState({
-                    temperature: response.data.currently.temperature
+                    temperature: response.data.currently.temperature,
+                    precipitationIntensity: response.data.currently.precipIntensity,
+                    precipitationChance: response.data.currently.precipProbability,
+                    windspeed: response.data.currently.windSpeed,
+                    humidity: response.data.currently.humidity,
+                    icon: response.data.currently.icon,
+                    date: response.headers.date
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -19030,24 +19046,100 @@ var App = function (_Component) {
             } else {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'display' },
+                    { className: 'main' },
                     _react2.default.createElement(
-                        'p',
-                        { className: 'temperature' },
-                        this.state.temperature
-                    ),
-                    _react2.default.createElement(
-                        'label',
-                        { className: 'switch' },
-                        _react2.default.createElement('input', { type: 'checkbox' }),
-                        _react2.default.createElement('span', { className: 'slider round' })
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'F/C'
+                        'div',
+                        { className: 'main__display' },
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'temperature' },
+                            Math.round(this.state.temperature * 10) / 10
+                        ),
+                        _react2.default.createElement(_sidepanel2.default, this.state)
                     )
                 );
+            }
+        }
+    }, {
+        key: 'renderWeather',
+        value: function renderWeather(icon) {
+            switch (icon) {
+                case 'cloudy':
+                    return 'cloudy';
+                    break;
+                case 'clear-day':
+                    return 'clear-day';
+                    break;
+                case 'clear-night':
+                    return 'clear-night';
+                    break;
+                case 'rain':
+                    return 'rain';
+                    break;
+                case 'snow':
+                    return 'snow';
+                    break;
+                case 'sleet':
+                    return 'sleet';
+                    break;
+                case 'wind':
+                    return 'wind';
+                    break;
+                case 'fog':
+                    return 'fog';
+                    break;
+                case 'cloudy':
+                    return 'cloudy';
+                    break;
+                case 'partly-cloudy-day':
+                    return 'partly-cloudy-day';
+                    break;
+                case 'partly-cloudy-night':
+                    return 'partly-cloudy-night';
+                    break;
+                default:
+                    return 'defaultColor';
+            }
+        }
+    }, {
+        key: 'renderInput',
+        value: function renderInput(icon) {
+            switch (icon) {
+                case 'cloudy':
+                    return 'cloudy-input';
+                    break;
+                case 'clear-day':
+                    return 'clear-day-input';
+                    break;
+                case 'clear-night':
+                    return 'clear-night-input';
+                    break;
+                case 'rain':
+                    return 'rain-input';
+                    break;
+                case 'snow':
+                    return 'snow-input';
+                    break;
+                case 'sleet':
+                    return 'sleet-input';
+                    break;
+                case 'wind':
+                    return 'wind-input';
+                    break;
+                case 'fog':
+                    return 'fog-input';
+                    break;
+                case 'cloudy':
+                    return 'cloudy-input';
+                    break;
+                case 'partly-cloudy-day':
+                    return 'partly-cloudy-day-input';
+                    break;
+                case 'partly-cloudy-night':
+                    return 'partly-cloudy-night-input';
+                    break;
+                default:
+                    return 'default-input';
             }
         }
     }, {
@@ -19055,19 +19147,14 @@ var App = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'App' },
+                { className: this.renderWeather(this.state.icon), id: 'weather' },
                 _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(
                         'h1',
-                        { className: 'text-primary' },
-                        'Weather'
-                    ),
-                    _react2.default.createElement(
-                        'div',
                         null,
-                        this.renderTemperature()
+                        'Weather'
                     ),
                     _react2.default.createElement(
                         'form',
@@ -19080,13 +19167,23 @@ var App = function (_Component) {
                                 { htmlFor: 'weather' },
                                 'Enter Location Name:'
                             ),
-                            _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'weather', placeholder: 'Chennai,Mumbai etc..' })
-                        ),
-                        _react2.default.createElement(
-                            'button',
-                            { type: 'submit', className: 'btn btn-primary' },
-                            'Submit'
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'searchbar' },
+                                _react2.default.createElement('input', { type: 'text', id: this.renderInput(this.state.icon), className: 'form-control', name: 'weather', placeholder: 'Chennai,Mumbai etc..' }),
+                                _react2.default.createElement(
+                                    'button',
+                                    { className: 'search-btn', type: 'submit' },
+                                    ' ',
+                                    _react2.default.createElement('i', { className: 'fas fa-search' })
+                                )
+                            )
                         )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        this.renderTemperature()
                     )
                 )
             );
@@ -19985,6 +20082,50 @@ module.exports = function spread(callback) {
   };
 };
 
+
+/***/ }),
+/* 55 */,
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Sidepanel = function Sidepanel(props) {
+    console.log(props);
+    return _react2.default.createElement(
+        "div",
+        { className: "sidepanel" },
+        "Summary of the day",
+        _react2.default.createElement("br", null),
+        "Date:",
+        props.date,
+        _react2.default.createElement("br", null),
+        "Chance Of Rain: ",
+        props.precipitationChance,
+        _react2.default.createElement("br", null),
+        "Intensity of Rain : ",
+        props.precipitationIntensity,
+        _react2.default.createElement("br", null),
+        "Humidity: ",
+        props.humidity,
+        _react2.default.createElement("br", null),
+        "WindSpeed:",
+        props.windspeed
+    );
+};
+
+exports.default = Sidepanel;
 
 /***/ })
 /******/ ]);

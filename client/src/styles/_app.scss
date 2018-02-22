@@ -1,0 +1,27 @@
+html,body{
+  
+}
+h1{
+   margin: 0;
+   padding-top: 20px;
+}
+button{
+    border: none;
+}
+
+#weather{
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+}
+
+.defaultColor{
+ 
+    background-color:$background-default;
+    color:$text-default;
+    
+}
+
+.search-btn{
+    background: transparent;
+}

@@ -1,0 +1,32 @@
+.searchbar{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+}
+
+
+#cloudy-input{
+    background-color: $background-cloudy;
+    color: $text-cloudy;
+    border-color: $text-cloudy;
+}
+#cloudy-input::placeholder{
+    color: rgba($text-cloudy,0.5);
+}
+#cloudy-input:focus{
+    border-color: $text-cloudy;
+    box-shadow: 0 0 10px $text-cloudy;
+}
+
+#default-input{
+    background-color: $background-default;
+    color: $text-default;
+    border-color: $text-default;
+}
+#default-input::placeholder{
+    color: rgba($text-default,0.5);
+}
+#default-input:focus{
+    border-color: $text-default;
+    box-shadow: 0 0 10px $text-default;
+}

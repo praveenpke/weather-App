@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "npm run build",
-    "build": "webpack && webpack-dev-server",
+    "build": "webpack --watch",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
