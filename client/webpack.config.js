@@ -22,6 +22,13 @@ module.exports=()=>{
             {
                 test:/\.s?css$/,           //combines all scss and css files using below loaders
                 loaders:ExtractTextPlugin.extract('css-loader!sass-loader')
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    'url-loader?limit=10000',
+                    'img-loader'
+                ]
             }
         ]
     },

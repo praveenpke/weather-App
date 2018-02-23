@@ -18976,7 +18976,7 @@ var _axios = __webpack_require__(36);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _sidepanel = __webpack_require__(56);
+var _sidepanel = __webpack_require__(55);
 
 var _sidepanel2 = _interopRequireDefault(_sidepanel);
 
@@ -19003,7 +19003,8 @@ var App = function (_Component) {
             humidity: '',
             icon: '',
             windspeed: '',
-            date: ''
+            date: '',
+            time: ''
         };
         _this.getWeather = _this.getWeather.bind(_this);
         _this.renderTemperature = _this.renderTemperature.bind(_this);
@@ -19032,7 +19033,8 @@ var App = function (_Component) {
                     windspeed: response.data.currently.windSpeed,
                     humidity: response.data.currently.humidity,
                     icon: response.data.currently.icon,
-                    date: response.headers.date
+                    date: response.headers.date,
+                    time: response.data.currently.time
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -19046,15 +19048,15 @@ var App = function (_Component) {
             } else {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'main' },
+                    { className: 'main ' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'main__display' },
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'temperature' },
-                            Math.round(this.state.temperature * 10) / 10
-                        ),
+                        { className: 'col-md-12 col-xs-12' },
+                        _react2.default.createElement('img', { className: 'gif', src: this.renderWeather(this.state.icon) })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'main__display col-md-12 col-xs-12' },
                         _react2.default.createElement(_sidepanel2.default, this.state)
                     )
                 );
@@ -19063,83 +19065,20 @@ var App = function (_Component) {
     }, {
         key: 'renderWeather',
         value: function renderWeather(icon) {
-            switch (icon) {
-                case 'cloudy':
-                    return 'cloudy';
-                    break;
-                case 'clear-day':
-                    return 'clear-day';
-                    break;
-                case 'clear-night':
-                    return 'clear-night';
-                    break;
-                case 'rain':
-                    return 'rain';
-                    break;
-                case 'snow':
-                    return 'snow';
-                    break;
-                case 'sleet':
-                    return 'sleet';
-                    break;
-                case 'wind':
-                    return 'wind';
-                    break;
-                case 'fog':
-                    return 'fog';
-                    break;
-                case 'cloudy':
-                    return 'cloudy';
-                    break;
-                case 'partly-cloudy-day':
-                    return 'partly-cloudy-day';
-                    break;
-                case 'partly-cloudy-night':
-                    return 'partly-cloudy-night';
-                    break;
-                default:
-                    return 'defaultColor';
-            }
-        }
-    }, {
-        key: 'renderInput',
-        value: function renderInput(icon) {
-            switch (icon) {
-                case 'cloudy':
-                    return 'cloudy-input';
-                    break;
-                case 'clear-day':
-                    return 'clear-day-input';
-                    break;
-                case 'clear-night':
-                    return 'clear-night-input';
-                    break;
-                case 'rain':
-                    return 'rain-input';
-                    break;
-                case 'snow':
-                    return 'snow-input';
-                    break;
-                case 'sleet':
-                    return 'sleet-input';
-                    break;
-                case 'wind':
-                    return 'wind-input';
-                    break;
-                case 'fog':
-                    return 'fog-input';
-                    break;
-                case 'cloudy':
-                    return 'cloudy-input';
-                    break;
-                case 'partly-cloudy-day':
-                    return 'partly-cloudy-day-input';
-                    break;
-                case 'partly-cloudy-night':
-                    return 'partly-cloudy-night-input';
-                    break;
-                default:
-                    return 'default-input';
+
+            if (icon.includes('day')) {
+                return 'sunny.gif';
+            } else if (icon.includes('night')) {
+                return 'cloudy-sunny-full.gif';
+            } else if (icon.includes('cloudy')) {
+
+                return 'cloudy-sunny.gif';
+            } else if (icon.includes('rain')) {
+                return 'rainy-day.gif';
+            } else if (icon.includes('fog')) {
+                return 'cloudy-sunny-full.gif';
+            } else {
+                return '';
             }
         }
     }, {
@@ -19147,15 +19086,10 @@ var App = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: this.renderWeather(this.state.icon), id: 'weather' },
+                { id: 'weather' },
                 _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(
-                        'h1',
-                        null,
-                        'Weather'
-                    ),
                     _react2.default.createElement(
                         'form',
                         { onSubmit: this.getWeather },
@@ -19163,14 +19097,9 @@ var App = function (_Component) {
                             'div',
                             { className: 'form-group' },
                             _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'weather' },
-                                'Enter Location Name:'
-                            ),
-                            _react2.default.createElement(
                                 'div',
                                 { className: 'searchbar' },
-                                _react2.default.createElement('input', { type: 'text', id: this.renderInput(this.state.icon), className: 'form-control', name: 'weather', placeholder: 'Chennai,Mumbai etc..' }),
+                                _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'weather', placeholder: 'Enter Location...' }),
                                 _react2.default.createElement(
                                     'button',
                                     { className: 'search-btn', type: 'submit' },
@@ -20084,8 +20013,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 55 */,
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20106,6 +20034,11 @@ var Sidepanel = function Sidepanel(props) {
     return _react2.default.createElement(
         "div",
         { className: "sidepanel" },
+        _react2.default.createElement(
+            "p",
+            { className: "temperature" },
+            Math.round(props.temperature * 10) / 10
+        ),
         "Summary of the day",
         _react2.default.createElement("br", null),
         "Date:",

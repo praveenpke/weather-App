@@ -1,27 +1,32 @@
 html,body{
-  
+    
 }
 h1{
    margin: 0;
-   padding-top: 20px;
+   
 }
 button{
     border: none;
 }
 
 #weather{
+    padding-top: 20px;
     height: 100vh;
     width: 100vw;
     text-align: center;
-}
-
-.defaultColor{
- 
-    background-color:$background-default;
-    color:$text-default;
+    background:linear-gradient($night-low 70%,$night-high);
+    color:$night-default;
     
 }
 
+
+
 .search-btn{
     background: transparent;
+}
+
+.gif{
+    background: transparent;
+    height: 300px;
+    width: 300px;
 }

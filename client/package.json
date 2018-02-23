@@ -36,5 +36,8 @@
     "build": "webpack --watch",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "img-loader": "^2.0.1"
   }
 }

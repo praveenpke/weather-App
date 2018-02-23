@@ -42,6 +42,7 @@ app.get('/api/weather',function(req,res){
             var lng = response.data.results[0].geometry.location.lng;
             var weatherUrl = `https://api.darksky.net/forecast/de182a3e669702c1bbc202ca4124afc8/${lat},${lng}`;
             
+            console.log(response.data);
             console.log(response.data.results[0].formatted_address);
 
             return axios.get(weatherUrl);

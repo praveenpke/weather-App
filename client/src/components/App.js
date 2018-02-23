@@ -12,7 +12,8 @@ class App extends Component {
             humidity:'',
             icon:'',
             windspeed:'',
-            date:''
+            date:'',
+            time:''
         }
         this.getWeather = this.getWeather.bind(this);
         this.renderTemperature = this.renderTemperature.bind(this);
@@ -41,7 +42,8 @@ class App extends Component {
                 windspeed:response.data.currently.windSpeed,
                 humidity:response.data.currently.humidity,
                 icon:response.data.currently.icon,
-                date:response.headers.date
+                date:response.headers.date,
+                time:response.data.currently.time
             })
 
         })
@@ -56,11 +58,15 @@ class App extends Component {
             return;
         }else{
             return(
-                <div className="main">
+                <div className="main ">
+                <div className="col-md-12 col-xs-12">
+                    <img className="gif" src={this.renderWeather(this.state.icon)}>
+                    
+                    </img>
+                </div>
                   
-                    <div className="main__display">
+                    <div className="main__display col-md-12 col-xs-12">
                        
-                        <p className="temperature">{Math.round(this.state.temperature*10)/10}</p>
                         <Sidepanel {...this.state}/>
                     </div>
                     
@@ -71,98 +77,38 @@ class App extends Component {
     }
     
     renderWeather(icon){
-        switch(icon){
-            case 'cloudy':
-                return 'cloudy'
-                break;
-            case 'clear-day':
-                return 'clear-day'
-                break;
-            case 'clear-night':
-                return 'clear-night'
-                break;
-            case 'rain':
-                return 'rain'
-                break;
-            case 'snow':
-                return 'snow'
-                break;
-            case 'sleet':
-                return 'sleet'
-                break;
-            case 'wind':
-                return 'wind'
-                break;
-            case 'fog':
-                return 'fog'
-                break;
-            case 'cloudy':
-                return 'cloudy'
-                break;
-            case 'partly-cloudy-day':
-                return 'partly-cloudy-day'
-                break;
-            case 'partly-cloudy-night':
-                return 'partly-cloudy-night'
-                break;
-            default:
-                return 'defaultColor'
+     
+        if(icon.includes('day')){
+            return 'sunny.gif';
+        }else if(icon.includes('night')){
+            return 'cloudy-sunny-full.gif';
+        }else if(icon.includes('cloudy')){
+         
+            return 'cloudy-sunny.gif';
+        }else if(icon.includes('rain')){
+            return 'rainy-day.gif';
+        }else if(icon.includes('fog')){
+            return 'cloudy-sunny-full.gif';
+        }
+        else{
+            return '';
         }
     }
 
-    renderInput(icon){
-        switch(icon){
-            case 'cloudy':
-                return 'cloudy-input'
-                break;
-            case 'clear-day':
-                return 'clear-day-input'
-                break;
-            case 'clear-night':
-                return 'clear-night-input'
-                break;
-            case 'rain':
-                return 'rain-input'
-                break;
-            case 'snow':
-                return 'snow-input'
-                break;
-            case 'sleet':
-                return 'sleet-input'
-                break;
-            case 'wind':
-                return 'wind-input'
-                break;
-            case 'fog':
-                return 'fog-input'
-                break;
-            case 'cloudy':
-                return 'cloudy-input'
-                break;
-            case 'partly-cloudy-day':
-                return 'partly-cloudy-day-input'
-                break;
-            case 'partly-cloudy-night':
-                return 'partly-cloudy-night-input'
-                break;
-            default:
-                return 'default-input'
-        }
-    }
-
+  
     render() { 
         return ( 
         
-            <div className={this.renderWeather(this.state.icon)} id="weather">
-                <div>
-                    <h1>Weather</h1>
+            <div  id="weather" >
+                <div >
+                    
 
 
                     <form onSubmit={this.getWeather}>
                         <div className="form-group">
-                            <label htmlFor="weather">Enter Location Name:</label>
+                            
                             <div className="searchbar">
-                                <input type="text" id={this.renderInput(this.state.icon)} className="form-control" name="weather" placeholder="Chennai,Mumbai etc.." />
+                                <input type="text"  className="form-control" name="weather" placeholder="Enter Location..." />
                                <button className="search-btn"  type="submit"> <i className="fas fa-search"></i></button>
                             </div>
                             

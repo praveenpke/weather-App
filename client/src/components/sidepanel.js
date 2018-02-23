@@ -4,6 +4,9 @@ const Sidepanel = (props) => {
     console.log(props)
     return (
         <div className="sidepanel">
+
+        <p className="temperature">{Math.round(props.temperature*10)/10}</p>
+        
         Summary of the day
         <br/>
         Date:{props.date}
