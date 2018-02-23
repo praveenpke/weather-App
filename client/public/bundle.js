@@ -19003,8 +19003,8 @@ var App = function (_Component) {
             humidity: '',
             icon: '',
             windspeed: '',
-            date: '',
-            time: ''
+            feelslike: ''
+
         };
         _this.getWeather = _this.getWeather.bind(_this);
         _this.renderTemperature = _this.renderTemperature.bind(_this);
@@ -19033,8 +19033,7 @@ var App = function (_Component) {
                     windspeed: response.data.currently.windSpeed,
                     humidity: response.data.currently.humidity,
                     icon: response.data.currently.icon,
-                    date: response.headers.date,
-                    time: response.data.currently.time
+                    feelslike: response.data.currently.apparentTemperature
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -19051,12 +19050,12 @@ var App = function (_Component) {
                     { className: 'main ' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'col-md-12 col-xs-12' },
-                        _react2.default.createElement('img', { className: 'gif', src: this.renderWeather(this.state.icon) })
+                        { className: 'col-md-4 col-xs-12' },
+                        _react2.default.createElement('img', { className: 'gif animated fadeInLeft', src: this.renderWeather(this.state.icon) })
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'main__display col-md-12 col-xs-12' },
+                        { className: 'display col-md-8 col-xs-12 animated fadeInRight' },
                         _react2.default.createElement(_sidepanel2.default, this.state)
                     )
                 );
@@ -20035,26 +20034,117 @@ var Sidepanel = function Sidepanel(props) {
         "div",
         { className: "sidepanel" },
         _react2.default.createElement(
-            "p",
-            { className: "temperature" },
-            Math.round(props.temperature * 10) / 10
+            "div",
+            { className: "temphead" },
+            _react2.default.createElement(
+                "div",
+                { className: "temperature" },
+                Math.round(props.temperature * 10) / 10,
+                _react2.default.createElement(
+                    "sup",
+                    null,
+                    "o"
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "degree" },
+                _react2.default.createElement(
+                    "label",
+                    { "class": "switch" },
+                    _react2.default.createElement("input", { type: "checkbox" }),
+                    _react2.default.createElement("span", { className: "slider round" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    null,
+                    "F   | C"
+                )
+            )
         ),
-        "Summary of the day",
-        _react2.default.createElement("br", null),
-        "Date:",
-        props.date,
-        _react2.default.createElement("br", null),
-        "Chance Of Rain: ",
-        props.precipitationChance,
-        _react2.default.createElement("br", null),
-        "Intensity of Rain : ",
-        props.precipitationIntensity,
-        _react2.default.createElement("br", null),
-        "Humidity: ",
-        props.humidity,
-        _react2.default.createElement("br", null),
-        "WindSpeed:",
-        props.windspeed
+        _react2.default.createElement(
+            "div",
+            { className: "subpanel" },
+            _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-6 subname" },
+                    "Feels Like:"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-4 subname" },
+                    props.feelslike
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-2 ico" },
+                    _react2.default.createElement("img", { src: "temperature.png", alt: "" })
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-6 subname" },
+                    "Chance Of Rain:"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-4 subname" },
+                    props.precipitationChance,
+                    " %"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-2 ico" },
+                    _react2.default.createElement("img", { src: "precipitation.png", alt: "" })
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-6 subname" },
+                    "Humidity:"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-4 subname" },
+                    props.humidity,
+                    " %"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-2 ico" },
+                    _react2.default.createElement("img", { src: "humidity.png", alt: "" })
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-6 subname" },
+                    "WindSpeed:"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-4 subname" },
+                    props.windspeed,
+                    " km/h"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-2 ico" },
+                    _react2.default.createElement("img", { src: "windspeed.png", alt: "" })
+                )
+            )
+        )
     );
 };
 

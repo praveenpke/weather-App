@@ -1,10 +1,8 @@
 html,body{
-    
+    height: 100vh;
+    width: 100vw;
 }
-h1{
-   margin: 0;
-   
-}
+
 button{
     border: none;
 }
@@ -16,7 +14,7 @@ button{
     text-align: center;
     background:linear-gradient($night-low 70%,$night-high);
     color:$night-default;
-    
+    overflow:scroll;
 }
 
 
@@ -26,7 +24,71 @@ button{
 }
 
 .gif{
+    margin-top: 10px;
     background: transparent;
-    height: 300px;
-    width: 300px;
+    height: 350px;
+    width: 350px;
+}
+
+.degree{
+    font-size: 20px;
+    display: flex-inline;
+    
+}
+.display{
+    margin-top: 50px;
+    
+}
+.temperature{
+    font-size: 9rem;
+    margin-right: 20px;
+   margin: 0 auto;
+    
+    
+}
+
+.temphead{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    
+}
+
+.sidepanel{
+   width: 70%;
+  
+    
+}
+.row{
+    font-size: 25px;
+    padding:10px;
+}
+
+.subname{
+    text-align: left;
+}
+
+.subpanel{
+    margin-left:70px;
+}
+
+
+@media (max-width: 500px){
+    .sidepanel{
+        width: 100%;
+  
+     }
+
+     .row{
+        font-size: 21px;
+        padding:10px;
+    }
+    .subpanel{
+        margin-left:0px;
+    }
+  
+   
+  
 }

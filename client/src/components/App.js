@@ -12,8 +12,8 @@ class App extends Component {
             humidity:'',
             icon:'',
             windspeed:'',
-            date:'',
-            time:''
+            feelslike:''
+           
         }
         this.getWeather = this.getWeather.bind(this);
         this.renderTemperature = this.renderTemperature.bind(this);
@@ -42,8 +42,7 @@ class App extends Component {
                 windspeed:response.data.currently.windSpeed,
                 humidity:response.data.currently.humidity,
                 icon:response.data.currently.icon,
-                date:response.headers.date,
-                time:response.data.currently.time
+                feelslike:response.data.currently.apparentTemperature
             })
 
         })
@@ -59,13 +58,13 @@ class App extends Component {
         }else{
             return(
                 <div className="main ">
-                <div className="col-md-12 col-xs-12">
-                    <img className="gif" src={this.renderWeather(this.state.icon)}>
+                <div className="col-md-4 col-xs-12">
+                    <img className="gif animated fadeInLeft" src={this.renderWeather(this.state.icon)}>
                     
                     </img>
                 </div>
                   
-                    <div className="main__display col-md-12 col-xs-12">
+                    <div className="display col-md-8 col-xs-12 animated fadeInRight">
                        
                         <Sidepanel {...this.state}/>
                     </div>
